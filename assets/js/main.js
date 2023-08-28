@@ -27,6 +27,15 @@ function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         const newHtml = pokemons.map(convertPokemonToLi).join('')
         pokemonList.innerHTML += newHtml
+
+         // Adicione um ouvinte de evento para cada item da lista
+         const pokemonItems = document.querySelectorAll('.pokemon');
+         pokemonItems.forEach((item) => {
+             item.addEventListener('click', () => {
+                 const pokemonNumber = item.querySelector('.number').textContent.slice(1);
+                 window.location.href = `detail.html?number=${pokemonNumber}`;
+             });
+         });
     })
 }
 
